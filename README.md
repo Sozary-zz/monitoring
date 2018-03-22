@@ -1,2 +1,3 @@
 # monitoring
-test
+## 1) Collecteur
+''' pip install psutil '''
