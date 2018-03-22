@@ -3,3 +3,5 @@
 ```bash
 pip install psutil
 ```
+
+On the each machines
