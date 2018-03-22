@@ -10,6 +10,7 @@ def getCPU():
     fichier = open("data.txt", "r")
     res = fichier.read()
     fichier.close()
+    subprocess.call(["rm", "data.txt"])
     return res
 
 def getRAM():
