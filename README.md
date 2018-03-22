@@ -1,3 +1,5 @@
 # monitoring
 ## 1) Collecteur
-''' pip install psutil '''
+```bash
+pip install psutil
+```
