@@ -1,3 +1,3 @@
 #!/bin/bash
 
-% free | awk 'FNR == 3 {print $3/($3+$4)*100}'
+free | awk 'FNR == 3 {print $3/($3+$4)*100}'
