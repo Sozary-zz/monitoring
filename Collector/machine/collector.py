@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 import psutil
 import platform
 import datetime
@@ -11,7 +12,7 @@ def getCPU():
     res = fichier.read()
     fichier.close()
     subprocess.call(["rm", "data.txt"])
-    return res
+    return res[:-3]
 
 def getRAM():
     bashCommand = "free | awk 'FNR == 3 {print $3/($3+$4)*100}'"
@@ -26,14 +27,9 @@ def getInfo():
     disk_percent = psutil.disk_usage('/')[3]
     boot_time = datetime.datetime.fromtimestamp(psutil.boot_time())
     running_since = boot_time.strftime("%A %d. %B %Y")
-    response = "OS: %s\nVersion: %s" % (os, version)
-    response += "\nName: %s\nNB_CPU: %s" % (name, cores)
-    response += "\nDisk: %s%%" % disk_percent
-    response += "\nCPU: %s" % getCPU()
-    response += "Memory: %s%%" % memory_percent
-    response += "\nSince: %s" % running_since
-    response += "\nRAM: %s%%\n" % getRAM()
-    return response
+
+    return json.dumps({"os":os,"v":version,"name":name,"cores":cores,"disk":disk_percent,"cpu":getCPU(),"memory":memory_percent,"ram":getRAM(),"date":running_since})
+
 
 
 hote = "159.89.17.141"
@@ -42,8 +38,7 @@ port = 15555
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 socket.connect((hote, port))
 print "Connection on {}".format(port)
-
-socket.send(getInfo())
+socket.send(getInfo().encode())
 
 print "Close the connection"
 socket.close()
