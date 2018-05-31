@@ -1,0 +1,22 @@
+{% extends "layout.html" %} {% block content %} {% set count = 0 %} {% for m in machines.items() %}
+<div class="card border-success mb-3" style="max-width: 20rem;" align="center">
+    <div class="card-header">
+        <!-- Affiche toutes les machines du parc avec leurs caractéritiques -->
+        <h3 align="center">{{m[1][count][1]}}</h3>
+    </div>
+    <div class="card-body">
+        <p>Version: {{m[1][count][2]}}</p>
+        <p>CPU: {{m[1][count][3]}}</p>
+        <p>Cores: {{m[1][count][4]}}</p>
+        <p>RAM: {{m[1][count][5]}}</p>
+        <p>Disk: {{m[1][count][6]}}</p>
+        <p>Memory: {{m[1][count][7]}}</p>
+        <p>OS: {{m[1][count][8]}}</p>
+        <p>IP address: {{m[1][count][9]}}</p>
+        <p>Creation: {{m[1][count][10]}}</p>
+    </div>
+</div>
+{% set count = count + 1 %} {% endfor %}
+<!-- Affichage des deux graphes SVG -->
+<h2 align="center">Charts</h2><img src={{ url_for( 'static', filename='images/chart.svg' ) }} alt="previous" title="Previous" border="0">
+<h2 align="center">Historic</h2><img src={{ url_for( 'static', filename='images/hist.svg' ) }} alt="previous" title="Previous" border="0"> {% endblock %}
